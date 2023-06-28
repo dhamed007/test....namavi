@@ -1,5 +1,3 @@
-// centrifugo.service.ts
-
 import { Injectable } from '@nestjs/common';
 import { Centrifuge } from 'centrifuge';
 
@@ -8,12 +6,12 @@ export class CentrifugoService {
   private centrifuge: Centrifuge;
 
   constructor() {
-    // this.centrifuge = new Centrifuge('http://localhost:8000/connection/websocket', {
-    //   debug: true,
-    //   insecure: true,
-    // });
-    const centrifuge = new Centrifuge('http://localhost:8000/connection/websocket');
-    centrifuge.connect();
+    const centrifugeOptions = {
+      // debug: true,
+      // insecure: true,
+    };
+    this.centrifuge = new Centrifuge('http://localhost:8000/connection/websocket', centrifugeOptions);
+    this.centrifuge.connect();
   }
 
   async connect(): Promise<void> {

@@ -1,10 +1,10 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { Document } from 'mongoose';
 
-export type UserDocument = User & Document;
+export type CoinDocument = Coin & Document;
 
 @Schema()
-export class User {
+export class Coin {
   @Prop({ required: true })
   languagePack: String;
 
@@ -18,4 +18,4 @@ export class User {
   updateBy: number;
 }
 
-export const UserSchema = SchemaFactory.createForClass(User);
+export const CoinSchema = SchemaFactory.createForClass(Coin);

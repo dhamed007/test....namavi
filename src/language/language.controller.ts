@@ -1,43 +1,34 @@
-import { Controller, Get, Post, Put, Delete, Param, Body, Inject } from '@nestjs/common';
+import { Controller, Get, Post, Put, Delete, Param, Body } from '@nestjs/common';
 import { LanguageService } from './language.service';
 import { CreateLangDto, UpdateLangDto } from './dto/create-language.dto';
-import { CentrifugoService } from 'src/centrifugo.service';
 
-@Controller('language')
+@Controller('languages')
 export class LanguageController {
-  constructor(
-    private readonly userService: LanguageService,
-    @Inject(CentrifugoService) private readonly centrifugoService: CentrifugoService,
-  ) {}
+  constructor(private readonly languageService: LanguageService) { }
 
   @Get()
   async findAll() {
-    return await this.userService.findAll();
+    return await this.languageService.findAll();
   }
 
   @Get(':id')
   async findById(@Param('id') id: string) {
-    return await this.userService.findById(id);
+    return await this.languageService.findById(id);
   }
 
   @Post()
   async create(@Body() createLangDto: CreateLangDto) {
-    const createdStudent = await this.userService.create(createLangDto);
-
-    // Publish the newly created student to Centrifugo for real-time updates
-    this.centrifugoService.publish('language', createdStudent);
-
-    return createdStudent;
+    const createdLanguage = await this.languageService.create(createLangDto);
+    return createdLanguage;
   }
 
   @Put(':id')
   async update(@Param('id') id: string, @Body() updateLangDto: UpdateLangDto) {
-    return await this.userService.update(id, updateLangDto);
+    return await this.languageService.update(id, updateLangDto);
   }
 
   @Delete(':id')
   async delete(@Param('id') id: string) {
-    return await this.userService.delete(id);
+    return await this.languageService.delete(id);
   }
 }
-

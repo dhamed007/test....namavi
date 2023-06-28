@@ -1,43 +1,34 @@
-import { Controller, Get, Post, Put, Delete, Param, Body, Inject } from '@nestjs/common';
+import { Controller, Get, Post, Put, Delete, Param, Body } from '@nestjs/common';
 import { CoinService } from './coins.service';
 import { CreateCoinDto, UpdateCoinDto } from './dto/create-coin.dto';
-import { CentrifugoService } from 'src/centrifugo.service';
 
 @Controller('coins')
 export class CoinController {
-  constructor(
-    private readonly userService: CoinService,
-    @Inject(CentrifugoService) private readonly centrifugoService: CentrifugoService,
-  ) {}
+  constructor(private readonly coinService: CoinService) { }
 
   @Get()
   async findAll() {
-    return await this.userService.findAll();
+    return await this.coinService.findAll();
   }
 
   @Get(':id')
   async findById(@Param('id') id: string) {
-    return await this.userService.findById(id);
+    return await this.coinService.findById(id);
   }
 
   @Post()
   async create(@Body() createCoinDto: CreateCoinDto) {
-    const createdStudent = await this.userService.create(createCoinDto);
-
-    // Publish the newly created student to Centrifugo for real-time updates
-    this.centrifugoService.publish('coins', createdStudent);
-
-    return createdStudent;
+    const createdCoin = await this.coinService.create(createCoinDto);
+    return createdCoin;
   }
 
   @Put(':id')
   async update(@Param('id') id: string, @Body() updateCoinDto: UpdateCoinDto) {
-    return await this.userService.update(id, updateCoinDto);
+    return await this.coinService.update(id, updateCoinDto);
   }
 
   @Delete(':id')
   async delete(@Param('id') id: string) {
-    return await this.userService.delete(id);
+    return await this.coinService.delete(id);
   }
 }
-

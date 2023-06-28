@@ -8,7 +8,7 @@ export class UserController {
   constructor(
     private readonly userService: UserService,
     @Inject(CentrifugoService) private readonly centrifugoService: CentrifugoService,
-  ) {}
+  ) { }
 
   @Get()
   async findAll() {
@@ -40,4 +40,3 @@ export class UserController {
     return await this.userService.delete(id);
   }
 }
-

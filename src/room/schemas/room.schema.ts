@@ -5,16 +5,14 @@ export type RoomDocument = Room & Document;
 
 @Schema()
 export class Room {
-  @Prop({ required: true })
-  userId: String;
+  @Prop({ required: true, type: String })
+  userId: string;
 
   @Prop({ required: true })
   type: string;
 
   @Prop()
-  chatInitiator: string;
-
- 
+  chatInitiator?: string;
 }
 
 export const RoomSchema = SchemaFactory.createForClass(Room);
