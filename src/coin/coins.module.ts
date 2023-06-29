@@ -11,4 +11,4 @@ import { User, UserSchema } from './schemas/coin.schema';
   controllers: [CoinController],
   providers: [CoinService],
 })
-export class StudentsModule {}
+export class CoinsModule {}
