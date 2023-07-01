@@ -10,7 +10,9 @@ export class CentrifugoService {
       // debug: true,
       // insecure: true,
     };
-    this.centrifuge = new Centrifuge('http://localhost:8000/connection/websocket', centrifugeOptions);
+    this.centrifuge = new Centrifuge('http://localhost:8000/connection/websocket');
+    const centrifuge = new Centrifuge('http://localhost:8000/connection/websocket');
+    
     this.centrifuge.connect();
   }
 
