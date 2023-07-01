@@ -11,7 +11,7 @@ export class CentrifugoService {
       // insecure: true,
     };
 
-    const centrifugeUrl = 'http://localhost:8000/connection/websocket', centrifugeOptions';
+    const centrifugeUrl = 'http://localhost:8000/connection/websocket';
     this.centrifuge = new Centrifuge(centrifugeUrl, centrifugeOptions);
     
     this.centrifuge.connect();
