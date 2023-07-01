@@ -1,6 +1,6 @@
 import { Module } from '@nestjs/common';
 import { MongooseModule } from '@nestjs/mongoose';
-import { CoinController } from 'namavi/src/room/room.controller';
+import { CoinController } from 'src/room/room.controller';
 import { RoomService } from './room.service';
 import { Room } from './schemas/room.schema';
 
